@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Table</title>
+    <style>
+        label {
+            display: inline-block;
+            width: 100px;
+            /* Adjust the width as needed */
+            margin-right: 10px;
+            /* Adjust the margin as needed */
+            margin-left: 5px;
+
+        }
+
+        input {
+            margin-bottom: 10px;
+            /* Adjust the margin as needed */
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Delete Table</h1>
+
+    <form id="Home" action="/home" method="post" enctype="multipart/form-data">
+        <input type="submit" value="Home"><br><br>
+    </form>
+
+
+    <form id="selectDatabase" action="/delete_table/select_database" method="post" enctype="multipart/form-data">
+        <label for="databasename">Database Name</label>
+        <input type="text" id="databasename" name="databasename" required>
+
+        <input type="submit" value="Select Database">
+    </form>
+
+    {% if database %}
+    <h1>
+        "{{ database }}" Database is Selected
+    </h1>
+    {% endif %}
+
+
+    <form id="deletetable" action="/delete_table/delete" method="post" enctype="multipart/form-data">
+        <label for="deletetable">Table Name</label>
+        <input type=" text" id="deletetable" name="deletetable" required>
+
+        <input type="submit" value="Delete Table">
+    </form>
+
+
+    {% if database %}
+    <h1>
+        {{ total_table }} Table Exist in "{{ database }}" Database
+    </h1>
+    {% endif %}
+
+    <ul>
+        {% for table in tables %}
+        <li>{{ table }}</li>
+        {% endfor %}
+    </ul>
+
+
+    {% if message %}
+    <h1>
+        {{ total_table }} Table Exist in "{{ database }}" Database
+    </h1>
+    {% endif %}
+
+
+
+    <script>
+        // Check if a message is present in the template and show the alert
+        var message = "{{ message }}";
+        if (message) {
+            showAlert(message, "{{ page }}");
+        }
+
+        function showAlert(message, page) {
+            alert(message);
+            window.location.href = page;
+        }
+
+
+    </script>
+</body>
+
+</html>

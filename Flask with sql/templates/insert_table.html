@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Table</title>
+    <style>
+        label {
+            display: inline-block;
+            width: 100px;
+            margin-right: 10px;
+            margin-left: 5px;
+        }
+
+        input {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Insert Table</h1>
+
+    <form id="Home" action="/home" method="post" enctype="multipart/form-data">
+        <input type="submit" value="Home"><br><br>
+    </form>
+
+    <form id="selectDatabase" action="/insert_table/select_database" method="post" enctype="multipart/form-data">
+        <label for="databasename">Database Name</label>
+        <input type="text" id="databasename" name="databasename" required>
+        <input type="submit" value="Select Database">
+    </form>
+
+    {% if database %}
+    <h2>{{ database }} Database is Selected Successfully</h2><br>
+    {% endif %}
+
+    <form id="selectTable" action="/insert_table/select_table" method="post" enctype="multipart/form-data">
+        <label for="tablename">Table Name</label>
+        <input type="text" id="tablename" name="tablename" required>
+        <input type="submit" value="Select Table">
+    </form>
+
+    {% if tablename %}
+    <h2>{{ tablename }} is Selected</h2><br>
+    {% endif %}
+
+
+    <script>
+        var message = "{{ message }}";
+        if (message) {
+            showAlert(message);
+        }
+
+        function showAlert(message) {
+            alert(message);
+        }
+
+    </script>
+
+</body>
+
+</html>

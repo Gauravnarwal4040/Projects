@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Form</title>
+</head>
+
+<body>
+    <h1>Company Record</h1>
+
+    <form action="/database" method="post">
+
+
+        <input type="submit" value="For Database">
+    </form>
+
+    <form action="/table" method="post">
+
+
+        <input type="submit" value="For Table">
+    </form>
+
+
+    {% if database %}
+    <h2>{{ database }} Database created. Now create a table.</h2>
+    {% endif %}
+</body>
+</div>
+
+</html>

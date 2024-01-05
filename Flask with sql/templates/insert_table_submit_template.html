@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Table</title>
+    <style>
+        label {
+            display: inline-block;
+            width: 100px;
+            margin-right: 10px;
+            margin-left: 5px;
+        }
+
+        input {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Insert Table</h1>
+
+    <form id="Home" action="/home" method="post" enctype="multipart/form-data">
+        <input type="submit" value="Home"><br>
+    </form>
+
+    {% if database %}
+    <h2>{{ database }} Database is Selected Successfully</h2>
+    {% endif %}
+
+    {% if tablename %}
+    <h2>{{ tablename }} Table is Selected</h2><br>
+    {% endif %}
+
+    <form id="createtable" action="/insert_table/insert_submit" method="post" enctype="multipart/form-data">
+
+        <div id="fields-container"></div>
+
+        <input type="button" value="Add Field" onclick="addField()">
+        <br><br>
+
+        <input type="submit" value="Insert Table">
+    </form>
+
+    <script>
+        var message = "{{ message }}";
+        if (message) {
+            showAlert(message);
+        }
+
+        function showAlert(message) {
+            alert(message);
+        }
+
+        // Function to create input fields dynamically
+        function addField() {
+            var container = document.getElementById("fields-container");
+
+            // Simulate receiving column names from the backend
+            var columns = {{ columns | default ('[]') | tojson | safe
+        }}; // Replace with actual column names
+
+        // Counter to track the row number
+        var rowNumber = container.querySelectorAll('h3').length + 1;
+
+        // Create a heading for the row
+        var rowHeading = document.createElement("h3");
+        rowHeading.textContent = "Row " + rowNumber;
+        container.appendChild(rowHeading);
+
+        // Iterate over column names and create input fields
+        columns.forEach(function (columnName) {
+            var labelElement = label(columnName);
+            var inputElement = document.createElement("input");
+            inputElement.type = "text";
+            inputElement.name = columnName + "_" + rowNumber;
+            inputElement.placeholder = columnName;
+            inputElement.required = true;
+
+            container.appendChild(labelElement);
+            container.appendChild(inputElement);
+            container.appendChild(document.createElement("br"));
+        });
+        }
+
+        // Function to create a label
+        function label(text) {
+            var label = document.createElement("label");
+            label.textContent = text;
+            return label;
+        }
+
+        // Initially add fields when the page loads (optional)
+        window.onload = function () {
+            addField();
+        };
+
+    </script>
+</body>
+
+</html>

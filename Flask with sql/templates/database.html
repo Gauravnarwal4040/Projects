@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Form</title>
+</head>
+
+<body>
+    <h1>Company Record</h1>
+
+    <form id="Home" action="/home" method="post" enctype="multipart/form-data">
+
+        <input type="submit" value="Home"><br><br><br>
+    </form>
+
+
+    <form action="/create_database" method="post">
+
+
+        <input type="submit" value="Create Database">
+    </form>
+
+    <form action="/show_databases" method="post">
+
+
+        <input type="submit" value="Show Databases">
+    </form>
+
+
+    <form action="/delete_database" method="post">
+
+        <input type="submit" value="Delete Database">
+    </form>
+
+
+
+    <body>
+        <h1>{{ all_databases }}</h1>
+    </body>
+</body>
+</div>
+
+</html>
