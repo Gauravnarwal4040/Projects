@@ -1,1 +1,0 @@
-jupyter notebook --notebook-dir="C:\\Users\\gaura\\OneDrive\\Desktop\\My_Project\\Hotel_Project"
